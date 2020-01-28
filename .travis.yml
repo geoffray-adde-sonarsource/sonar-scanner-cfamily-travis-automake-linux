@@ -1,0 +1,20 @@
+dist: trusty
+sudo: false
+
+addons:
+  sonarcloud:
+    organization: "geoffray-adde-sonarsource-github"
+
+script:
+  - autoreconf --install
+  - ./configure
+  # Wraps the compilation with the Build Wrapper to generate configuration (used
+  # later by the SonarQube Scanner) into the "bw-output" folder
+  - build-wrapper-linux-x86-64 --out-dir bw-output make clean all
+  # And finally run the SonarQube analysis - read the "sonar-project.properties"
+  # file to see the specific configuration
+  - sonar-scanner
+
+cache:
+  directories:
+    - '$HOME/.sonar/cache'
