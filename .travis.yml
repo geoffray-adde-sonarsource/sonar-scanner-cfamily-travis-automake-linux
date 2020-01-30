@@ -6,6 +6,7 @@ addons:
     organization: "geoffray-adde-sonarsource-github"
 
 script:
+  # Prepare the build system
   - autoreconf --install
   - ./configure
   # Wraps the compilation with the Build Wrapper to generate configuration (used
